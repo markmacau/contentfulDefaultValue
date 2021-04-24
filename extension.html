@@ -52,8 +52,8 @@
             extension.field.setValue(defaultValue || '');
         }
 
-        console.log("fieldValue2")
-        console.log(extension.field.getValue())
+        //console.log("fieldValue2")
+        //console.log(extension.field.getValue())
 
         function valueChangeHandler(value) {
             value = value || '';
@@ -62,9 +62,8 @@
                 inputEl.value = value;
             }
 
-            console.log("value: "+value)
+            //console.log("value: "+value)
             if(value){
-
                 extension.field.setInvalid(false);
             }else{
                 extension.field.setInvalid(true);
