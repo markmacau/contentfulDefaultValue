@@ -11,7 +11,7 @@
         "description": "Set default value",
         "type": "Symbol",
         "description": "please set value. this extension is made by Mark https://github.com/markmacau/contentfulDefaultValue/blob/main/extension.json",
-        "required": false
+        "required": true
       }
     ]
   }
