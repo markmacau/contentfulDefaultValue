@@ -37,12 +37,18 @@
         window.addEventListener('onbeforeunload', unloadHandler);
 
         const defaultValue = extension.parameters.instance.defaultValue;
+        console.log("defaultValue")
+        console.log(defaultValue)
 
         const isNewlyCreated = extension.entry.getSys().version < 2;
         const hasNoValue = typeof extension.field.getValue() === 'undefined';
 
         if (isNewlyCreated && hasNoValue) {
             extension.field.setValue(defaultValue || '');
+        }
+
+        if(!value && defaultValue){
+            inputEl.value = defaultValue
         }
 
         function valueChangeHandler(value) {
