@@ -40,6 +40,9 @@
         console.log("defaultValue")
         console.log(defaultValue)
 
+
+
+
         const isNewlyCreated = extension.entry.getSys().version < 2;
         const hasNoValue = typeof extension.field.getValue() === 'undefined';
 
@@ -50,6 +53,9 @@
         if(!value && defaultValue){
             extension.field.setValue(defaultValue || '');
         }
+
+        console.log("fieldValue")
+        console.log(extension.field.getValue())
 
         function valueChangeHandler(value) {
             value = value || '';
