@@ -1,0 +1,38 @@
+<!doctype html>
+<head>
+    <link rel="stylesheet" type="text/css" href="https://contentful.github.io/ui-extensions-sdk/cf-extension.css">
+    <script src="https://unpkg.com/contentful-ui-extensions-sdk@3"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.6/zepto.js"></script>
+    <style>
+        body { margin: 0; }
+    </style>
+</head>
+<body>
+<div class="cf-form-field">
+    <input type="text" class="cf-form-input">
+</div>
+</body>
+
+<script>
+    //<input class="form-control" size="50" >
+    var cfExt = window.contentfulExtension || window.contentfulWidget
+
+    //const defaultValue = "1"
+    const defaultValue = extension.parameters.instance.defaultColor;
+    cfExt.init(function (api) {
+        api.window.startAutoResizer()
+        if(!$('input').val()){
+            $('input').val(defaultValue)
+        }
+
+        api.field.onValueChanged(function (value) {
+            if(!value){
+                $('input').val(defaultValue)
+            }
+        })
+
+        $('input').on('input', function (ev) {
+            api.field.setValue(ev.target.value)
+        })
+    })
+</script>
