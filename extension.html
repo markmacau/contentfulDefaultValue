@@ -2,10 +2,6 @@
 <head>
     <link rel="stylesheet" type="text/css" href="https://contentful.github.io/ui-extensions-sdk/cf-extension.css">
     <script src="https://unpkg.com/contentful-ui-extensions-sdk@3"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.6/zepto.js"></script>
-    <style>
-        body { margin: 0; }
-    </style>
 </head>
 <body>
 <div class="cf-form-field">
@@ -17,7 +13,7 @@
     // the extension installed from https://github.com/markmacau/contentfulDefaultValue/blob/main/extension.json
     'use strict';
 
-    var cfExt = window.contentfulExtension || window.contentfulWidget
+    const cfExt = window.contentfulExtension || window.contentfulWidget
 
     //const defaultValue = "1"
 
@@ -66,11 +62,15 @@
                 inputEl.value = value;
             }
 
+            console.log("value: "+value)
             if(value){
+
                 extension.field.setInvalid(false);
             }else{
                 extension.field.setInvalid(true);
             }
+
+
         }
 
         function keyboardInputHandler() {
