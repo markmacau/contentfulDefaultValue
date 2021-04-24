@@ -48,7 +48,7 @@
         }
 
         if(!value && defaultValue){
-            inputEl.value = defaultValue
+            extension.field.setValue(defaultValue || '');
         }
 
         function valueChangeHandler(value) {
