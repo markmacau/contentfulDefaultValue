@@ -39,8 +39,9 @@
         const defaultValue = extension.parameters.instance.defaultValue;
         console.log("defaultValue")
         console.log(defaultValue)
-
-
+        console.log("field type: "+extension.field.type)
+        console.log("fieldValue2")
+        console.log(extension.field.getValue())
 
 
         const isNewlyCreated = extension.entry.getSys().version < 2;
@@ -54,7 +55,7 @@
             extension.field.setValue(defaultValue || '');
         }
 
-        console.log("fieldValue")
+        console.log("fieldValue2")
         console.log(extension.field.getValue())
 
         function valueChangeHandler(value) {
