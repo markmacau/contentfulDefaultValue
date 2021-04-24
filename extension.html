@@ -18,11 +18,16 @@
     var cfExt = window.contentfulExtension || window.contentfulWidget
 
     //const defaultValue = "1"
-    const defaultValue = extension.parameters.instance.defaultColor;
-    console.log("defaultValue defaultColor")
-    console.log(defaultValue)
+
 
     cfExt.init(function (api) {
+
+        const defaultValue = api.parameters.instance.defaultValue;
+
+        console.log("defaultValue")
+        console.log(defaultValue)
+
+
         api.window.startAutoResizer()
         if(!$('input').val()){
             $('input').val(defaultValue)
