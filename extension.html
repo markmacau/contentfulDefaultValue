@@ -93,9 +93,9 @@
 
         function valueTypeChange(val){
             if(extension.field.type == "Integer"){
-                return Int(val)
+                return parseInt(val)
             }else if(extension.field.type == "Number"){
-                return Float(val)
+                return parseFloat(val)
             }else{
                 return val
             }
