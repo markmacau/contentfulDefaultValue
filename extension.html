@@ -15,34 +15,66 @@
 
 <script>
     // the extension installed from https://github.com/markmacau/contentfulDefaultValue/blob/main/extension.json
+    'use strict';
 
-    //<input class="form-control" size="50" >
     var cfExt = window.contentfulExtension || window.contentfulWidget
 
     //const defaultValue = "1"
 
 
-    cfExt.init(function (api) {
+    cfExt.init(function (extension) {
 
-        const defaultValue = api.parameters.instance.defaultValue;
+        extension.window.startAutoResizer()
 
-        console.log("defaultValue")
-        console.log(defaultValue)
+        const inputEl = document.querySelector('.cf-form-input');
+        inputEl.value = extension.field.getValue() || '';
 
 
-        api.window.startAutoResizer()
-        if(!$('input').val()){
-            $('input').val(defaultValue)
+
+        const detachValueChangeHandler = extension.field.onValueChanged(valueChangeHandler);
+
+        inputEl.addEventListener('input', keyboardInputHandler);
+        window.addEventListener('onbeforeunload', unloadHandler);
+
+        const defaultValue = extension.parameters.instance.defaultValue;
+
+        const isNewlyCreated = extension.entry.getSys().version < 2;
+        const hasNoValue = typeof extension.field.getValue() === 'undefined';
+
+        if (isNewlyCreated && hasNoValue) {
+            extension.field.setValue(defaultValue || '');
         }
 
-        api.field.onValueChanged(function (value) {
-            if(!value){
-                $('input').val(defaultValue)
-            }
-        })
+        function valueChangeHandler(value) {
+            value = value || '';
 
-        $('input').on('input', function (ev) {
-            api.field.setValue(ev.target.value)
-        })
+            if (value !== inputEl.value) {
+                inputEl.value = value;
+            }
+
+            if(!value){
+                extension.field.setInvalid(false);
+            }else{
+                extension.field.setInvalid(true);
+            }
+        }
+
+        function keyboardInputHandler() {
+            var value = inputEl.value;
+
+            if (typeof value === 'string' && value.length > 0) {
+                extension.field.setValue(value);
+            } else {
+                extension.field.setValue(defaultValue || '');
+                //extension.field.removeValue();
+                //inputEl.value = '';
+            }
+        }
+
+        function unloadHandler() {
+            window.removeEventListener('onbeforeunload', unloadHandler);
+            inputEl.removeEventListener('input', keyboardInputHandler);
+            detachValueChangeHandler();
+        }
     })
 </script>
